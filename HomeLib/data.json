@@ -1,0 +1,179 @@
+﻿{
+  "kind": "books#volumes",
+  "totalItems": 2,
+  "items": [
+    {
+      "kind": "books#volume",
+      "id": "wOVHzgEACAAJ",
+      "etag": "DEwdJiJpO6E",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/wOVHzgEACAAJ",
+      "volumeInfo": {
+        "title": "A sociedade do anel",
+        "authors": [
+          "John Ronald Reuel Tolkien"
+        ],
+        "publishedDate": "2001",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_10",
+            "identifier": "8533613377"
+          },
+          {
+            "type": "ISBN_13",
+            "identifier": "9788533613379"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": false
+        },
+        "pageCount": 434,
+        "printType": "BOOK",
+        "categories": [
+          "Fantasy fiction, English"
+        ],
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "preview-1.0.0",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "language": "pt-BR",
+        "previewLink": "http://books.google.com.br/books?id=wOVHzgEACAAJ&dq=isbn:8533613377&hl=&cd=1&source=gbs_api",
+        "infoLink": "http://books.google.com.br/books?id=wOVHzgEACAAJ&dq=isbn:8533613377&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/A_sociedade_do_anel.html?hl=&id=wOVHzgEACAAJ"
+      },
+      "saleInfo": {
+        "country": "BR",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "BR",
+        "viewability": "NO_PAGES",
+        "embeddable": false,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=wOVHzgEACAAJ&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "NONE",
+        "quoteSharingAllowed": false
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "z59kPwAACAAJ",
+      "etag": "uTCR/eBTzmQ",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/z59kPwAACAAJ",
+      "volumeInfo": {
+        "title": "Senhor Dos Aneis, O - a Sociedade Do Anel - Vol 1",
+        "authors": [
+          "J. R. R. Tolkien"
+        ],
+        "publisher": "Martins Martins Fontes",
+        "publishedDate": "2000",
+        "description": "Numa cidadezinha indolente do Condado, um jovem hobbit é encarregado de uma imensa tarefa - deve empreender uma perigosa viagem através da Terra-média até as Fendas da Perdição, e lá destruir o Anel do Poder - a única coisa que impede o domínio maléfico do Senhor do Escuro.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_10",
+            "identifier": "8533613377"
+          },
+          {
+            "type": "ISBN_13",
+            "identifier": "9788533613379"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": false
+        },
+        "pageCount": 434,
+        "printType": "BOOK",
+        "categories": [
+          "Baggins, Frodo (Fictitious character)"
+        ],
+        "averageRating": 4.5,
+        "ratingsCount": 14,
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "preview-1.0.0",
+        "language": "pt-BR",
+        "previewLink": "http://books.google.com.br/books?id=z59kPwAACAAJ&dq=isbn:8533613377&hl=&cd=2&source=gbs_api",
+        "infoLink": "http://books.google.com.br/books?id=z59kPwAACAAJ&dq=isbn:8533613377&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/Senhor_Dos_Aneis_O_a_Sociedade_Do_Anel_V.html?hl=&id=z59kPwAACAAJ"
+      },
+      "saleInfo": {
+        "country": "BR",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "BR",
+        "viewability": "NO_PAGES",
+        "embeddable": false,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=z59kPwAACAAJ&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "NONE",
+        "quoteSharingAllowed": false
+      }
+    }
+  ]
+}
+
+[
+  {
+    "id": 1,
+    "title": "O Andarilho",
+    "authors": "Bernard Cornwell",
+    "publishedDate": "2001",
+    "pageCount": 345,
+    "categorie": "Fantasy",
+    "language": "Portuguese",
+    "description": ""
+  },
+  {
+    "id": 2,
+    "title": "Harry Potter",
+    "authors": "Rowling",
+    "publishedDate": "1997",
+    "pageCount": 100,
+    "categorie": "Fantasy",
+    "language": "Portuguese",
+    "description": ""
+  }
+]
+
+{
+  "id": 0,
+  "title": "A sociedade do anel",
+  "authors": "John Ronald Reuel Tolkien",
+  "publishedDate": "2001",
+  "pageCount": 434,
+  "categorie": "Fantasy fiction",
+  "language": "pt-BR",
+  "description": null
+}
+
+{
+  "id": 0,
+  "title": "Novo livro",
+  "authors": "asdasd",
+  "publishedDate": "777",
+  "pageCount": 77,
+  "categorie": "fdfd",
+  "language": "fff",
+  "description": "string"
+}
