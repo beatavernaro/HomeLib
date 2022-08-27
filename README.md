@@ -9,6 +9,11 @@ EXTRA: crie um projeto para consumir os dados da API que você acabou de constru
 #
 ### Solução
 Uma aplicação simples que cadastra seus livros pelo código [ISBN](https://www.cblservicos.org.br/isbn/o-que-e-isbn/#:~:text=O%20ISBN%20%28International%20Standard%20Book,como%20livros,%20artigos%20e%20apostilas.) e pode retornar algumas formas de pesquisa no banco de dados.
+Console App - 'Front End' Não precisa ter um banco de dados populado
+https://github.com/beatavernaro/HomeLib
+
+WEB API - 'BackEnd' https://github.com/beatavernaro/LibHomeFinalProj
+
 ISBN para utilizar de exemplos: 
 - 8533613377 (O Senhor dos Anéis - A Sociedade do Anel)
 - 8532511015 (Harry Potter e a pedra filosofal)
