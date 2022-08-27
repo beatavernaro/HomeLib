@@ -13,7 +13,9 @@ namespace HomeLib
 {
     internal class FindBook
     {
-         public static async Task GetAll()
+
+        #region GetAll
+        public static async Task GetAll()
          {
 
                 HttpClient httpClient = new HttpClient();
@@ -30,16 +32,19 @@ namespace HomeLib
                     Console.WriteLine($"-- ID: {bookData.Id}  --");
                     Console.WriteLine($"Título: {bookData.Title}  |  Autor: {bookData.Authors}  |  Categoria: {bookData.Categorie} \r\n");
                 }
-               
-                }
+                Console.WriteLine("Pressione qualquer tecla para voltar ao menu inicial");
+                Console.ReadKey();
+                Menu.MainMenu();
+            }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
                 }
 
          }
+        #endregion
 
-        
+        #region ShowBookByYear
         public static async Task ShowBookByYear(string year)
         {
             HttpClient httpClient = new HttpClient();
@@ -55,6 +60,10 @@ namespace HomeLib
                     Console.WriteLine($"-- ID: {bookData.Id}  --");
                     Console.WriteLine($"Título: {bookData.Title}  |  Autor: {bookData.Authors}  |  Categoria: {bookData.Categorie}  |  Ano: {bookData.PublishedDate}\r\n");
                 }
+
+                Console.WriteLine("Pressione qualquer tecla para voltar ao menu inicial");
+                Console.ReadKey();
+                Menu.MainMenu();
             } else
             {
                 Console.WriteLine("Livro não encontrado!");
@@ -62,8 +71,9 @@ namespace HomeLib
                 Menu.MainMenu();
             }
         }
+        #endregion
 
-
+        #region ShowBookByAuthor
         public static async Task ShowBookByAuthor(string name)
         {
             HttpClient httpClient = new HttpClient();
@@ -79,6 +89,10 @@ namespace HomeLib
                     Console.WriteLine($"-- ID: {bookData.Id}  --");
                     Console.WriteLine($"Título: {bookData.Title}  |  Autor: {bookData.Authors}  |  Categoria: {bookData.Categorie}  |  Ano: {bookData.PublishedDate}\r\n");
                 }
+
+                Console.WriteLine("Pressione qualquer tecla para voltar ao menu inicial");
+                Console.ReadKey();
+                Menu.MainMenu();
             }
             else
             {
@@ -87,7 +101,9 @@ namespace HomeLib
                 Menu.MainMenu();
             }
         }
+        #endregion
 
+        #region ShowBookByTitle
         public static async Task ShowBookByTitle(string title)
         {
             HttpClient httpClient = new HttpClient();
@@ -103,7 +119,9 @@ namespace HomeLib
                     Console.WriteLine($"-- ID: {bookData.Id}  --");
                     Console.WriteLine($"Título: {bookData.Title}  |  Autor: {bookData.Authors}  |  Categoria: {bookData.Categorie}  |  Ano: {bookData.PublishedDate}\r\n");
                 }
-                
+                Console.WriteLine("Pressione qualquer tecla para voltar ao menu inicial");
+                Console.ReadKey();
+                Menu.MainMenu();
             }
             else
             {
@@ -112,7 +130,9 @@ namespace HomeLib
                 Menu.MainMenu();
             }
         }
+        #endregion
 
+        #region ShowBookById
         public static async Task ShowBookById(int id)
         {
             HttpClient httpClient = new HttpClient();
@@ -128,7 +148,9 @@ namespace HomeLib
                     Console.WriteLine($"-- ID: {bookData.Id}  --");
                     Console.WriteLine($"Título: {bookData.Title}  |  Autor: {bookData.Authors}  |  Categoria: {bookData.Categorie}  |  Ano: {bookData.PublishedDate}\r\n");
                 }
-
+                Console.WriteLine("Pressione qualquer tecla para voltar ao menu inicial");
+                Console.ReadKey();
+                Menu.MainMenu();
             }
             else
             {
@@ -137,8 +159,9 @@ namespace HomeLib
                 Menu.MainMenu();
             }
         }
+        #endregion
 
-        
+        #region DeleteOneBook
         public static async Task DeleteOneBook()
         {
             Console.Write("Digite o título para encontrar o livro: ");
@@ -170,10 +193,11 @@ namespace HomeLib
                     Menu.MainMenu();
                 }
             }
-
            
         }
+        #endregion
 
+        #region UpdateOneBook
         public static async Task UpdateOneBook()
         {
             Console.Write("Digite o título para encontrar o livro: ");
@@ -181,10 +205,10 @@ namespace HomeLib
             ShowBookByTitle(title).GetAwaiter().GetResult();
 
             Console.Write("Digite o ID do livro que gostaria de atualizar: ");
-            var idDelete = int.Parse(Console.ReadLine()!);
+            var idUpdate = int.Parse(Console.ReadLine()!);
 
             Console.Clear();
-            await ShowBookById(idDelete);
+            await ShowBookById(idUpdate);
 
             Console.WriteLine("\r\nDeseja atualizar esse livro? s/n \r\n");
             var input = Console.ReadLine();
@@ -245,8 +269,8 @@ namespace HomeLib
                 }
             }
 
-
         }
+        #endregion
 
     }
 }

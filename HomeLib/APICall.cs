@@ -12,7 +12,9 @@ namespace HomeLib
 {
     internal class APICall
     {
-         public static async Task Call()
+
+        #region Call Google Books API
+        public static async Task Call()
          {
             
                 HttpClient httpClient = new HttpClient();
@@ -33,7 +35,7 @@ namespace HomeLib
 
                     if (result!.TotalItems != 0)
                     {
-                        await GetBook(result);
+                        await SaveBook(result);
                         newSearch = "n";
                     }
                     else
@@ -48,10 +50,11 @@ namespace HomeLib
                 {
                     Console.WriteLine(ex);
                 }
-
          }
+        #endregion
 
-        public static async Task GetBook(BookResponse bookResponse)
+        #region SaveBook
+        public static async Task SaveBook(BookResponse bookResponse)
         {
             Console.WriteLine("\r\nLivro encontrado!\r\n");
 
@@ -87,10 +90,10 @@ namespace HomeLib
             }
             else
                 Menu.MainMenu();
-        
-
         }
+        #endregion
 
+        #region AddBook
         public static async Task AddBook(BookData newBook)
         {
             HttpClient httpClient = new HttpClient();
@@ -102,6 +105,7 @@ namespace HomeLib
             var response = await httpClient.PostAsync("https://localhost:44335/api/Books", httpContent);
         
         }
+        #endregion
 
     }
 }

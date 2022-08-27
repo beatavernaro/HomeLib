@@ -10,11 +10,13 @@ namespace HomeLib
     {
         public static void MainMenu()
         {
+            Console.Clear();
             Console.WriteLine("O que gostaria de fazer?\r\n");
             Console.WriteLine("1 - Cadastrar livro pelo ISBN");
             Console.WriteLine("2 - Consultar livro");
             Console.WriteLine("3 - Deletar um livro");
             Console.WriteLine("4 - Atualizar um livro");
+            Console.WriteLine("5 - Sair");
 
             var option = int.Parse(Console.ReadLine()!);
             Console.Clear();
@@ -32,6 +34,10 @@ namespace HomeLib
                 case 4:
                     FindBook.UpdateOneBook().GetAwaiter().GetResult();
                     break;
+                case 5:
+                    Console.WriteLine("Obrigada!");
+                    Environment.Exit(1);
+                    break;
             }
         }
 
@@ -43,7 +49,9 @@ namespace HomeLib
             Console.WriteLine("2 - Por ano de lançamento");
             Console.WriteLine("3 - Por autor");
             Console.WriteLine("4 - Por título");
-            
+            Console.WriteLine("5 - Voltar");
+
+
             var option = int.Parse(Console.ReadLine()!);
             Console.Clear();
 
@@ -71,9 +79,7 @@ namespace HomeLib
                     FindBook.ShowBookByTitle(title).GetAwaiter().GetResult();
                     break;
                 case 5:
-                    Console.WriteLine("Digite o ID: ");
-                    var id = int.Parse(Console.ReadLine()!);
-                    FindBook.ShowBookById(id).GetAwaiter().GetResult();
+                    MainMenu();
                     break;
             }
         }
