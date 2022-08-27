@@ -42,7 +42,7 @@ namespace HomeLib
             [JsonPropertyName("pageCount")]
             public int PageCount { get; set; }
 
-            [JsonPropertyName("categories")]
+        [JsonPropertyName("categories")]
             public List<string> Categories { get; set; }
 
             [JsonPropertyName("language")]

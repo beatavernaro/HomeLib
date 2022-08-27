@@ -15,8 +15,7 @@ namespace HomeLib
          public static async Task Call()
          {
             
-            // https://www.googleapis.com/books/v1/volumes?q=isbn:8533613377
-            HttpClient httpClient = new HttpClient();
+                HttpClient httpClient = new HttpClient();
                 
                 try
                 {
@@ -24,7 +23,7 @@ namespace HomeLib
                 while (newSearch == "s")
                 {
                     Console.WriteLine("Digite o ISBN do livro: ");
-                    var isbn = long.Parse(Console.ReadLine());
+                    var isbn = long.Parse(Console.ReadLine()!);
                     //var isbn = 8533613377; //arch 8501061700
 
                     var response = await httpClient.GetAsync($"https://www.googleapis.com/books/v1/volumes?q=isbn:{isbn}");
@@ -32,9 +31,9 @@ namespace HomeLib
                     var message = await response.Content.ReadAsStringAsync();
                     var result = JsonSerializer.Deserialize<BookResponse>(message);
 
-                    if (result.TotalItems != 0)
+                    if (result!.TotalItems != 0)
                     {
-                        GetBook(result);
+                        await GetBook(result);
                         newSearch = "n";
                     }
                     else
@@ -52,35 +51,43 @@ namespace HomeLib
 
          }
 
-        public static void GetBook(BookResponse bookResponse)
+        public static async Task GetBook(BookResponse bookResponse)
         {
-            Console.WriteLine("Livro encontrado!");
+            Console.WriteLine("\r\nLivro encontrado!\r\n");
 
             var bookInfo = bookResponse.Items[0].VolumeInfo;
-
+           
             BookData newBook = new BookData();
             newBook.Title = bookInfo.Title;
             newBook.Authors = bookInfo.Authors.ToArray()[0];
             newBook.PublishedDate = bookInfo.PublishedDate;
             newBook.PageCount = bookInfo.PageCount;
-            newBook.Categorie = bookInfo.Categories.ToArray()[0].Split(",")[0];
+            if (bookInfo.Categories.ToArray()[0] == null)
+                newBook.Categorie = "Não encontrado";
+            else
+                newBook.Categorie = bookInfo.Categories.ToArray()[0];
             newBook.Language = bookInfo.Language;
             newBook.Description = bookInfo.Description;
-            Console.WriteLine($" Título: {bookInfo.Title}  |  Autor: {bookInfo.Authors.ToArray()[0]}");
 
+            Console.WriteLine($" Título: {newBook.Title}  |  Autor: {newBook.Authors}");
+            Console.WriteLine($" Categoria: {newBook.Categorie}  |  Data da publicação: {newBook.PublishedDate}");
+            Console.WriteLine();
             Console.WriteLine("Gostaria de adicionar esse livro a sua coleção? s/n");
             var input = Console.ReadLine();
-            if(input == "s")
+            if (input == "s")
             {
-                /*Console.WriteLine("Esse livro está emprestado?");
-                input = Console.ReadLine();
-                if (input == "s")
-                    newBook.Borrowed = "s";
-                else
-                    newBook.Borrowed = "n";
-                //AQUI SALVA O LIVRO NO BANCO */
-                AddBook(newBook);
+                await AddBook(newBook);
+                Console.WriteLine("\r\nSalvando...");
+                Thread.Sleep(3000);
+                Console.Clear();
+                Console.WriteLine("Salvo!");
+                Thread.Sleep(1500);
+                Console.Clear();
+                Menu.MainMenu();
             }
+            else
+                Menu.MainMenu();
+        
 
         }
 
@@ -92,23 +99,8 @@ namespace HomeLib
             
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
             
-
-            Console.WriteLine("PASSOU AQUI ANTES");
-           var response = await httpClient.PostAsync("https://localhost:44335/api/Books", httpContent);
-            Console.WriteLine("PASSOU AQUI DEPOIS");
-
-            var code = response.StatusCode;
-            var message = await response.Content.ReadAsStringAsync();
-            if (response.IsSuccessStatusCode)
-            {
-                Console.WriteLine("foi");
-            }
-            else
-            {
-                Console.WriteLine("erro");
-            }
-
-            
+            var response = await httpClient.PostAsync("https://localhost:44335/api/Books", httpContent);
+        
         }
 
     }
