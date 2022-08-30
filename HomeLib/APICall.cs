@@ -37,8 +37,8 @@ namespace HomeLib
                     {
                         Console.WriteLine("\r\nLivro encontrado!\r\n");
                         var bookInfo = result.Items[0].VolumeInfo;
-                        Console.WriteLine($" Título: {bookInfo.Title}  |  Autor: {bookInfo.Authors}");
-                        Console.WriteLine($" Categoria: {bookInfo.Categories}  |  Data da publicação: {bookInfo.PublishedDate}");
+                        Console.WriteLine($" Título: {bookInfo.Title}  |  Autor: {bookInfo.Authors[0]}");
+                        Console.WriteLine($" Categoria: {bookInfo.Categories[0]}  |  Data da publicação: {bookInfo.PublishedDate}");
                         Console.WriteLine("\r\nGostaria de adicionar esse livro a sua coleção? s/n");
 
                         var input = Console.ReadLine()!.ToLower();
@@ -52,9 +52,15 @@ namespace HomeLib
                     else
                     {
                         Console.WriteLine("Livro não encontrado!");
-                        Console.WriteLine("Gostaria de fazer outra busca? s/n");
-                        newSearch = Console.ReadLine();
-                        Console.Clear();
+                        Console.WriteLine("Gostaria de adicionar o livro manualmente? s/n");
+                        if (Console.ReadLine()! == "s")
+                            await EnterBook();
+                        else
+                        {
+                            Console.WriteLine("\r\nGostaria de fazer outra busca?");
+                            newSearch = Console.ReadLine();
+                            Console.Clear();
+                        }
                     }
                 }
                 }
@@ -83,11 +89,12 @@ namespace HomeLib
             newBook.Language = bookInfo.Language;
             newBook.Description = bookInfo.Description;
 
-                await AddBook(newBook);
+                await ManipulateBook.AddBook(newBook);
                 Console.WriteLine("\r\nSalvando...");
                 Thread.Sleep(3000);
                 Console.Clear();
                 Console.WriteLine("Salvo!");
+            Console.WriteLine("Voltando ao menu principal");
                 Thread.Sleep(1500);
                 Console.Clear();
                 Menu.MainMenu();
@@ -95,8 +102,7 @@ namespace HomeLib
         }
         #endregion
 
-
-        #region SaveBook
+        #region EnterBook
         public static async Task EnterBook()
         {
             var newBook = new BookData();
@@ -124,7 +130,7 @@ namespace HomeLib
             Console.WriteLine("Deseja salvar esse livro? s/n");
             if (Console.ReadLine() == "s".ToLower())
             {
-                await AddBook(newBook);
+                await ManipulateBook.AddBook(newBook);
                 Console.WriteLine("\r\nSalvando...");
                 Thread.Sleep(3000);
                 Console.Clear();
@@ -141,20 +147,6 @@ namespace HomeLib
                 Console.Clear();
                 Menu.MainMenu();
             }
-        }
-        #endregion
-
-        #region AddBook
-        public static async Task AddBook(BookData newBook)
-        {
-            HttpClient httpClient = new HttpClient();
-
-            var json = JsonSerializer.Serialize(newBook);
-            
-            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-            
-            var response = await httpClient.PostAsync("https://localhost:44335/api/Books", httpContent);
-        
         }
         #endregion
 

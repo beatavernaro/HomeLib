@@ -29,10 +29,10 @@ namespace HomeLib
                     SubmenuGet();
                     break;
                 case 3:
-                    FindBook.DeleteOneBook().GetAwaiter().GetResult();
+                    ManipulateBook.DeleteOneBook().GetAwaiter().GetResult();
                     break;
                 case 4:
-                    FindBook.UpdateOneBook().GetAwaiter().GetResult();
+                    ManipulateBook.UpdateOneBook().GetAwaiter().GetResult();
                     break;
                 case 5:
                     Console.WriteLine("Obrigada!");
@@ -104,5 +104,12 @@ namespace HomeLib
                     
             }
         }
+
+        public static void GoBack()
+        {
+            Console.WriteLine("\r\nPressione qualquer tecla para voltar ao menu inicial");
+            Console.ReadKey();
+            MainMenu();
         }
+    }
 }
