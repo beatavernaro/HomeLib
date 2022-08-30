@@ -32,9 +32,7 @@ namespace HomeLib
                     Console.WriteLine($"-- ID: {bookData.Id}  --");
                     Console.WriteLine($"Título: {bookData.Title}  |  Autor: {bookData.Authors}  |  Categoria: {bookData.Categorie} \r\n");
                 }
-                Console.WriteLine("Pressione qualquer tecla para voltar ao menu inicial");
-                Console.ReadKey();
-                Menu.MainMenu();
+                
             }
                 catch (Exception ex)
                 {
@@ -61,9 +59,6 @@ namespace HomeLib
                     Console.WriteLine($"Título: {bookData.Title}  |  Autor: {bookData.Authors}  |  Categoria: {bookData.Categorie}  |  Ano: {bookData.PublishedDate}\r\n");
                 }
 
-                Console.WriteLine("Pressione qualquer tecla para voltar ao menu inicial");
-                Console.ReadKey();
-                Menu.MainMenu();
             } else
             {
                 Console.WriteLine("Livro não encontrado!");
@@ -90,9 +85,6 @@ namespace HomeLib
                     Console.WriteLine($"Título: {bookData.Title}  |  Autor: {bookData.Authors}  |  Categoria: {bookData.Categorie}  |  Ano: {bookData.PublishedDate}\r\n");
                 }
 
-                Console.WriteLine("Pressione qualquer tecla para voltar ao menu inicial");
-                Console.ReadKey();
-                Menu.MainMenu();
             }
             else
             {
@@ -119,9 +111,7 @@ namespace HomeLib
                     Console.WriteLine($"-- ID: {bookData.Id}  --");
                     Console.WriteLine($"Título: {bookData.Title}  |  Autor: {bookData.Authors}  |  Categoria: {bookData.Categorie}  |  Ano: {bookData.PublishedDate}\r\n");
                 }
-                Console.WriteLine("Pressione qualquer tecla para voltar ao menu inicial");
-                Console.ReadKey();
-                Menu.MainMenu();
+                
             }
             else
             {
@@ -133,7 +123,7 @@ namespace HomeLib
         #endregion
 
         #region ShowBookById
-        public static async Task ShowBookById(int id)
+        public static async Task<BookData> ShowBookById(int id)
         {
             HttpClient httpClient = new HttpClient();
             var response = await httpClient.GetAsync($"https://localhost:44335/api/Books/id/{id}");
@@ -141,23 +131,7 @@ namespace HomeLib
             var message = await response.Content.ReadAsStringAsync();
             var result = JsonSerializer.Deserialize<List<BookData>>(message);
 
-            if (result.Count() != 0)
-            {
-                foreach (var bookData in result)
-                {
-                    Console.WriteLine($"-- ID: {bookData.Id}  --");
-                    Console.WriteLine($"Título: {bookData.Title}  |  Autor: {bookData.Authors}  |  Categoria: {bookData.Categorie}  |  Ano: {bookData.PublishedDate}\r\n");
-                }
-                Console.WriteLine("Pressione qualquer tecla para voltar ao menu inicial");
-                Console.ReadKey();
-                Menu.MainMenu();
-            }
-            else
-            {
-                Console.WriteLine("Titulo não encontrado!");
-                Thread.Sleep(2000);
-                Menu.MainMenu();
-            }
+            return result[0];
         }
         #endregion
 
@@ -208,13 +182,18 @@ namespace HomeLib
             var idUpdate = int.Parse(Console.ReadLine()!);
 
             Console.Clear();
-            await ShowBookById(idUpdate);
+            
+            var book = ShowBookById(idUpdate).GetAwaiter().GetResult();
+
+            var bookUpdate = new BookData();
+
+            bookUpdate = book;
 
             Console.WriteLine("\r\nDeseja atualizar esse livro? s/n \r\n");
             var input = Console.ReadLine();
             if (input == "s")
             {
-                var bookUpdate = new BookData();
+                
                 var update = "s";
                 while (update == "s")
                 {
@@ -244,7 +223,7 @@ namespace HomeLib
                             bookUpdate.PublishedDate = Console.ReadLine()!;
                             break;
                     }
-                    Console.WriteLine("\r\nAtualizar mais algum campo?");
+                    Console.WriteLine("\r\nAtualizar mais algum campo? s/n");
                     update = Console.ReadLine();
                 }
 

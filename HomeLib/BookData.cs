@@ -33,6 +33,7 @@ namespace HomeLib
 
         [JsonPropertyName("description")]
         public string Description { get; set; } = string.Empty;
+
     }
 }
 
