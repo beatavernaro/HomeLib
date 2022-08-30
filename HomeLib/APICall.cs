@@ -35,14 +35,26 @@ namespace HomeLib
 
                     if (result!.TotalItems != 0)
                     {
-                        await SaveBook(result);
-                        newSearch = "n";
+                        Console.WriteLine("\r\nLivro encontrado!\r\n");
+                        var bookInfo = result.Items[0].VolumeInfo;
+                        Console.WriteLine($" Título: {bookInfo.Title}  |  Autor: {bookInfo.Authors}");
+                        Console.WriteLine($" Categoria: {bookInfo.Categories}  |  Data da publicação: {bookInfo.PublishedDate}");
+                        Console.WriteLine("\r\nGostaria de adicionar esse livro a sua coleção? s/n");
+
+                        var input = Console.ReadLine()!.ToLower();
+
+                        if (input == "s")
+                        {
+                            await SaveBook(result);
+                            newSearch = "n";
+                        }
                     }
                     else
                     {
                         Console.WriteLine("Livro não encontrado!");
                         Console.WriteLine("Gostaria de fazer outra busca? s/n");
                         newSearch = Console.ReadLine();
+                        Console.Clear();
                     }
                 }
                 }
@@ -56,11 +68,10 @@ namespace HomeLib
         #region SaveBook
         public static async Task SaveBook(BookResponse bookResponse)
         {
-            Console.WriteLine("\r\nLivro encontrado!\r\n");
-
             var bookInfo = bookResponse.Items[0].VolumeInfo;
            
             BookData newBook = new BookData();
+
             newBook.Title = bookInfo.Title;
             newBook.Authors = bookInfo.Authors.ToArray()[0];
             newBook.PublishedDate = bookInfo.PublishedDate;
@@ -72,13 +83,6 @@ namespace HomeLib
             newBook.Language = bookInfo.Language;
             newBook.Description = bookInfo.Description;
 
-            Console.WriteLine($" Título: {newBook.Title}  |  Autor: {newBook.Authors}");
-            Console.WriteLine($" Categoria: {newBook.Categorie}  |  Data da publicação: {newBook.PublishedDate}");
-            Console.WriteLine();
-            Console.WriteLine("Gostaria de adicionar esse livro a sua coleção? s/n");
-            var input = Console.ReadLine();
-            if (input == "s")
-            {
                 await AddBook(newBook);
                 Console.WriteLine("\r\nSalvando...");
                 Thread.Sleep(3000);
@@ -87,9 +91,56 @@ namespace HomeLib
                 Thread.Sleep(1500);
                 Console.Clear();
                 Menu.MainMenu();
+          
+        }
+        #endregion
+
+
+        #region SaveBook
+        public static async Task EnterBook()
+        {
+            var newBook = new BookData();
+            Console.WriteLine("Tenha o livro em mão e digite:");
+            Console.Write("Título: ");
+            newBook.Title = Console.ReadLine()!;
+
+            Console.Write("Autor: ");
+            newBook.Authors = Console.ReadLine()!;
+
+            Console.Write("Data da publicação: ");
+            newBook.PublishedDate = Console.ReadLine()!;
+
+            Console.Write("Quantidade de páginas: ");
+            newBook.PageCount = int.Parse(Console.ReadLine()!);
+
+            Console.Write("Categoria: ");
+            newBook.Categorie = Console.ReadLine()!;
+
+            Console.Write("Idioma: ");
+            newBook.Language = Console.ReadLine()!;
+
+            newBook.Description = " ";
+
+            Console.WriteLine("Deseja salvar esse livro? s/n");
+            if (Console.ReadLine() == "s".ToLower())
+            {
+                await AddBook(newBook);
+                Console.WriteLine("\r\nSalvando...");
+                Thread.Sleep(3000);
+                Console.Clear();
+                Console.WriteLine("Salvo!");
+                Console.WriteLine("Voltando ao meu principal");
+                Thread.Sleep(1500);
+                Console.Clear();
+                Menu.MainMenu();
             }
             else
+            {
+                Console.WriteLine("Voltando ao meu principal");
+                Thread.Sleep(1500);
+                Console.Clear();
                 Menu.MainMenu();
+            }
         }
         #endregion
 

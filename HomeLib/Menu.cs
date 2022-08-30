@@ -12,7 +12,7 @@ namespace HomeLib
         {
             Console.Clear();
             Console.WriteLine("O que gostaria de fazer?\r\n");
-            Console.WriteLine("1 - Cadastrar livro pelo ISBN");
+            Console.WriteLine("1 - Cadastrar livro");
             Console.WriteLine("2 - Consultar livro");
             Console.WriteLine("3 - Deletar um livro");
             Console.WriteLine("4 - Atualizar um livro");
@@ -23,10 +23,10 @@ namespace HomeLib
             switch (option)
             {
                 case 1:
-                    APICall.Call().GetAwaiter().GetResult();
+                    SubmenuPost();
                     break;
                 case 2:
-                    Submenu();
+                    SubmenuGet();
                     break;
                 case 3:
                     FindBook.DeleteOneBook().GetAwaiter().GetResult();
@@ -41,7 +41,7 @@ namespace HomeLib
             }
         }
 
-        public static void Submenu()
+        public static void SubmenuGet()
         {
             Console.Clear();
             Console.WriteLine("CONSULTAR: ");
@@ -83,5 +83,26 @@ namespace HomeLib
                     break;
             }
         }
-    }
+
+        public static void SubmenuPost()
+        {
+            Console.Clear();
+            Console.WriteLine("1 - Cadastrar pelo ISBN");
+            Console.WriteLine("2 - Cadastrar Manualmente");
+
+            var option = int.Parse(Console.ReadLine()!);
+            Console.Clear();
+
+            switch (option)
+            {
+                case 1:
+                    APICall.Call().GetAwaiter().GetResult();
+                    break;
+                case 2:
+                    APICall.EnterBook().GetAwaiter().GetResult();
+                    break;
+                    
+            }
+        }
+        }
 }
