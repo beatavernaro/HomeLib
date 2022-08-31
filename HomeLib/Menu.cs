@@ -10,36 +10,45 @@ namespace HomeLib
     {
         public static void MainMenu()
         {
-            Console.Clear();
-            Console.WriteLine("O que gostaria de fazer?\r\n");
-            Console.WriteLine("1 - Cadastrar livro");
-            Console.WriteLine("2 - Consultar livro");
-            Console.WriteLine("3 - Deletar um livro");
-            Console.WriteLine("4 - Atualizar um livro");
-            Console.WriteLine("5 - Sair");
+                       
+                Console.Clear();
+                Console.WriteLine("O que gostaria de fazer?\r\n");
+                Console.WriteLine("1 - Cadastrar livro");
+                Console.WriteLine("2 - Consultar livro");
+                Console.WriteLine("3 - Deletar um livro");
+                Console.WriteLine("4 - Atualizar um livro");
+                Console.WriteLine("5 - Sair");
 
-            var option = int.Parse(Console.ReadLine()!);
-            Console.Clear();
-            switch (option)
+                var input = int.TryParse(Console.ReadLine()!, out int option);
+            while(option == 0 || option > 5)
             {
-                case 1:
-                    SubmenuPost();
-                    break;
-                case 2:
-                    SubmenuGet();
-                    break;
-                case 3:
-                    ManipulateBook.DeleteOneBook().GetAwaiter().GetResult();
-                    break;
-                case 4:
-                    ManipulateBook.UpdateOneBook().GetAwaiter().GetResult();
-                    break;
-                case 5:
-                    Console.WriteLine("Obrigada!");
-                    Environment.Exit(1);
-                    break;
+                Console.WriteLine("OPÇÃO INVÁLIDA");
+                Thread.Sleep(1000);
+                MainMenu();
             }
+                Console.Clear();
+                switch (option)
+                {
+                    case 1:
+                        SubmenuPost();
+                        break;
+                    case 2:
+                        SubmenuGet();
+                        break;
+                    case 3:
+                        ManipulateBook.DeleteOneBook().GetAwaiter().GetResult();
+                        break;
+                    case 4:
+                        ManipulateBook.UpdateOneBook().GetAwaiter().GetResult();
+                        break;
+                    case 5:
+                        Console.WriteLine("Obrigada!");
+                        Environment.Exit(1);
+                        break;
+                }
+            
         }
+    
 
         public static void SubmenuGet()
         {
@@ -52,7 +61,13 @@ namespace HomeLib
             Console.WriteLine("5 - Voltar");
 
 
-            var option = int.Parse(Console.ReadLine()!);
+            var input = int.TryParse(Console.ReadLine()!, out int option);
+            while (option == 0 || option > 5)
+            {
+                Console.WriteLine("OPÇÃO INVÁLIDA");
+                Thread.Sleep(1000);
+                SubmenuGet();
+            }
             Console.Clear();
 
             switch (option)
@@ -90,7 +105,13 @@ namespace HomeLib
             Console.WriteLine("1 - Cadastrar pelo ISBN");
             Console.WriteLine("2 - Cadastrar Manualmente");
 
-            var option = int.Parse(Console.ReadLine()!);
+            var input = int.TryParse(Console.ReadLine()!, out int option);
+            while (option == 0 || option > 2)
+            {
+                Console.WriteLine("OPÇÃO INVÁLIDA");
+                Thread.Sleep(1000);
+                SubmenuPost();
+            }
             Console.Clear();
 
             switch (option)
