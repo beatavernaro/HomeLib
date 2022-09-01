@@ -1,6 +1,6 @@
 # 
 ### **Projeto Final - Tecnicas de Programação**
-**Professor: [Ronaldo Senha](https://ronaldosena.com/)**
+**Professor: [Ronaldo Sena](https://ronaldosena.com/)**
 
 Para o projeto final você deve criar uma API utilizando o template de projeto 'ASP.NET Core Web API', conforme visto em sala.
 Você deve criar 4 endpoints para efetuar as operações de CRUD e ao menos 1 endpoint para voltar alguma forma de análise, como por exemplo algum dado estatístico. Mas sinta-se livre para criar quantos você quiser =)
