@@ -5,6 +5,10 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeLib", "HomeLib\HomeLib.csproj", "{13BE8AA1-8E0A-45DF-97DE-DF3F3FD8FACB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{75212109-7594-4C88-81C9-642D57EA7DC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeLib.Domain", "src\HomeLib.Domain\HomeLib.Domain.csproj", "{0B81BFCD-A81F-4CBC-8845-5453BEC168F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,11 +19,18 @@ Global
 		{13BE8AA1-8E0A-45DF-97DE-DF3F3FD8FACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13BE8AA1-8E0A-45DF-97DE-DF3F3FD8FACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13BE8AA1-8E0A-45DF-97DE-DF3F3FD8FACB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B81BFCD-A81F-4CBC-8845-5453BEC168F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B81BFCD-A81F-4CBC-8845-5453BEC168F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B81BFCD-A81F-4CBC-8845-5453BEC168F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B81BFCD-A81F-4CBC-8845-5453BEC168F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E0E316F4-2D56-4AA6-9E72-B41DEF99BF83}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0B81BFCD-A81F-4CBC-8845-5453BEC168F0} = {75212109-7594-4C88-81C9-642D57EA7DC9}
 	EndGlobalSection
 EndGlobal
