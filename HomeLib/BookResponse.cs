@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 
 namespace HomeLib
 {
+    [Obsolete($"Essa classe foi substituida por {nameof(Domain.Dto.BookResponse)}.")]
     public class BookResponse
     {
         [JsonPropertyName("totalItems")]

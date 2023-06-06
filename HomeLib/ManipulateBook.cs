@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.Json.Serialization;
+﻿using System.Text;
 using System.Text.Json;
-using System.Net.Http;
-using System.Collections.Generic;
-
+using DomainDto = HomeLib.Domain.Dto;
 
 namespace HomeLib
 {
@@ -131,7 +124,7 @@ namespace HomeLib
         #endregion
 
         #region AddBook
-        public static async Task AddBook(BookData newBook)
+        public static async Task AddBook(DomainDto.BookData newBook)
         {
             HttpClient httpClient = new HttpClient();
             var json = JsonSerializer.Serialize(newBook);

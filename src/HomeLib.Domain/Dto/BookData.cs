@@ -3,13 +3,30 @@
 /// <summary>
 /// Representa os dados do livro.
 /// </summary>
+/// <remarks>
+/// <para>
+/// Perceba que removi os atributos <see cref="JsonPropertyNameAttribute"/>, pois o resultado que você espera pode ser
+/// feito automaticamente através de uma configuração na serialização. Você verá mais detalhes sobre isso na Application.
+/// A ideia é só decorar quando for estritamente necessário, como por exemplo, ignorar uma propriedade na
+/// serialização/desserialização.
+/// </para>
+/// <para>
+/// Tomei a liberdade de remover o <see cref="System.Text.Json"/> nativo e trocar pelo pacote Newtonsoft. Embora o
+/// serializador nativo seja ótimo em muitos aspectos, ele ainda é um componente em constante evolução para alcançar todos
+/// os feitos do "concorrente". 
+/// </para>
+/// <para>
+/// Você pode acompanhar esse roadmap clicando
+/// <a href="https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/migrate-from-newtonsoft?pivots=dotnet-6-0#table-of-differences-between-newtonsoftjson-and-systemtextjson">
+///     aqui.
+/// </a>
+/// </para> 
+/// </remarks>
 public class BookData
 {
-    [JsonPropertyName("id")]
     public int Id { get; set; }
 
-    [JsonPropertyName("title")]
-    public string Title { get; set; } = string.Empty;
+    public string? Title { get; set; } = string.Empty;
     
     /// <summary>
     /// Nome do autor.
@@ -29,21 +46,15 @@ public class BookData
     ///                     </a>
     ///     </para>
     /// </remarks>
-    [JsonPropertyName("authors")]
     public string? Authors { get; set; }
 
-    [JsonPropertyName("publishedDate")]
-    public string PublishedDate { get; set; } = string.Empty;
+    public string? PublishedDate { get; set; } = string.Empty;
 
-    [JsonPropertyName("pageCount")]
-    public int PageCount { get; set; }
+    public int? PageCount { get; set; }
 
-    [JsonPropertyName("categorie")]
-    public string Categorie { get; set; } = string.Empty;
+    public string? Categorie { get; set; } = string.Empty;
 
-    [JsonPropertyName("language")]
-    public string Language { get; set; } = string.Empty;
+    public string? Language { get; set; } = string.Empty;
 
-    [JsonPropertyName("description")]
-    public string Description { get; set; } = string.Empty;
+    public string? Description { get; set; } = string.Empty;
 }
