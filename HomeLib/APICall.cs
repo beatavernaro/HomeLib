@@ -89,20 +89,21 @@ internal class APICall
         //a HomeLib.Application. Portanto, irei deixar aqui por referência.
         //await BookService.SaveBookFromGoogleBookAsync(googleBookResponse).ConfigureAwait(false);
 
+        Console.WriteLine();
+        Console.WriteLine("Salvando...");
+        
         using (var httpClient = new HttpClient())
         {
-            var json = JsonConvert.SerializeObject(googleBookResponse);
+            var json = JsonConvert.SerializeObject(googleBookResponse.ToBook());
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await httpClient.PostAsync($"{ApiUrlBase}Book", httpContent);
 
-            if (!response.IsSuccessStatusCode)
+            if (response is { IsSuccessStatusCode: false, StatusCode: HttpStatusCode.UnprocessableEntity })
             {
                 throw new Exception(await response.Content.ReadAsStringAsync());
             }
         }
-
-        Console.WriteLine();
-        Console.WriteLine("Salvando...");
+        
         Console.Clear();
         Console.WriteLine("Salvo!");
         Console.WriteLine("Voltando ao menu principal");

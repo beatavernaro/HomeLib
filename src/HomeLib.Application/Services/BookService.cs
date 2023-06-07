@@ -4,15 +4,15 @@
 /// Serviço dedicado as rotinas relacionadas ao Livro.
 /// </summary>
 /// <remarks>Iremos tratar de repositórios mais pra frente. Por hora, será simples assim.</remarks>
-public class BookService
+public static class BookService
 {
     private const string NomeBancoDados = "bancoDados.txt";
 
-    public static async Task SaveBookFromGoogleBookAsync(GoogleBookResponse googleBookResponse)
+    public static Book ToBook(this GoogleBookResponse googleBookResponse)
     {
         var volumeInfo = googleBookResponse.FirstVolumeInfo;
         
-        var livro = new Book
+        return new Book
         {
             Id = new Random().Next(1, int.MaxValue),
             Isbn = volumeInfo?.Isbn,
@@ -24,11 +24,9 @@ public class BookService
             Language = volumeInfo?.Language,
             Description = volumeInfo?.Description
         };
-
-        await SaveBookAsync(livro);
     }
     
-    public static async Task SaveBookAsync(Book book)
+    public static async Task<int> SaveBookAsync(Book book)
     {
         if (!File.Exists(NomeBancoDados))
         {
@@ -52,5 +50,7 @@ public class BookService
         //Não suporta gravações concorrentes. É apenas didático.
         //Quando movermos para um banco de dados real, isso será removido.
         await File.WriteAllTextAsync(NomeBancoDados, JsonConvert.SerializeObject(bancoDados)).ConfigureAwait(false);
+
+        return book.Id;
     }
 }
