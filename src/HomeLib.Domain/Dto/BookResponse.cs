@@ -42,12 +42,13 @@ public class BookResponse
 public class Item
 {
     public string? Id { get; set; }
-    
     public VolumeInfo? VolumeInfo { get; set; }
 }
 
 public class VolumeInfo
 {
+    public string? Isbn { get; set; }
+    
     public string? Title { get; set; }
 
     public List<string?>? Authors { get; set; }

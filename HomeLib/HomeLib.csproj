@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Using Include="HomeLib.Application.Services" />
     <ProjectReference Include="..\src\HomeLib.Application\HomeLib.Application.csproj" />
   </ItemGroup>
 

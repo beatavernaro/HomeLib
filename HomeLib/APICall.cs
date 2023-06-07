@@ -1,8 +1,8 @@
-﻿using HomeLib.Application.Services;
-//Estou isolando o namespace novo para demarcar bem o que é novo e o que você fez, assim
-//fica mais fácil compreender o objetivo das mudanças. Ao fim da refatoração, podemores 
+﻿//Estou isolando o namespace novo para demarcar bem o que é novo e o que você fez, assim
+//fica mais fácil compreender o objetivo das mudanças. Ao fim da refatoração, poderemos 
 //simplificar isso.
 using DomainDto = HomeLib.Domain.Dto;
+using DomainEntidade = HomeLib.Domain.Entidades;
 
 namespace HomeLib;
 
@@ -25,12 +25,15 @@ internal class APICall
 
                 if (bookResponse?.FirstVolumeInfo is not null)
                 {
-                    Console.WriteLine($"{Environment.NewLine}Livro encontrado!{Environment.NewLine}");
+                    Console.WriteLine();
+                    Console.WriteLine("Livro encontrado");
+                    Console.WriteLine();
                     Console.WriteLine(
                         $" Título: {bookResponse.FirstVolumeInfo.Title}  |  Autor: {bookResponse.FirstVolumeInfo.FirstAuthor}");
                     Console.WriteLine(
                         $" Categoria: {bookResponse.FirstVolumeInfo.FirstCategory}  |  Data da publicação: {bookResponse.FirstVolumeInfo.PublishedDate}");
-                    Console.WriteLine($"{Environment.NewLine}Gostaria de adicionar esse livro a sua coleção? s/n");
+                    Console.WriteLine();
+                    Console.WriteLine("Gostaria de adicionar esse livro a sua coleção? s/n");
 
                     var input = Console.ReadLine()!.ToLower();
 
@@ -57,7 +60,14 @@ internal class APICall
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex);
+            //No momento, estamos tradando do fluxo de mensagens através de exceptions, apenas
+            //por questões didáticas. Em breve, vamos mudar isso e torná-lo mais funcional.
+            //Modifiquei aqui para o uso no console ser mais fluído.
+            Console.WriteLine(ex.Message);
+            Console.WriteLine("Pressione qualquer tecla para retornar ao menu principal.");
+            Console.ReadKey();
+            Console.Clear();
+            Menu.MainMenu();
         }
     }
     #endregion
@@ -66,36 +76,21 @@ internal class APICall
 
     private static async Task SaveBook(DomainDto.BookResponse bookResponse)
     {
-        var bookInfo = bookResponse.Items?[0].VolumeInfo;
-           
-        var newBook = new DomainDto.BookData
-        {
-            Title = bookInfo?.Title,
-            Authors = bookInfo?.Authors?.ToArray()[0],
-            PublishedDate = bookInfo?.PublishedDate,
-            PageCount = bookInfo?.PageCount,
-            Categorie = bookInfo?.Categories?.ToArray()[0],
-            Language = bookInfo?.Language,
-            Description = bookInfo?.Description
-        };
-
-        await ManipulateBook.AddBook(newBook);
-        Console.WriteLine("\r\nSalvando...");
-        Thread.Sleep(3000);
+        await BookService.SaveBookAsync(bookResponse).ConfigureAwait(false);
+        Console.WriteLine();
+        Console.WriteLine("Salvando...");
         Console.Clear();
         Console.WriteLine("Salvo!");
         Console.WriteLine("Voltando ao menu principal");
-        Thread.Sleep(1500);
         Console.Clear();
         Menu.MainMenu();
-          
     }
     #endregion
 
     #region EnterBook
     public static async Task EnterBook()
     {
-        var newBook = new DomainDto.BookData();
+        var newBook = new DomainEntidade.Book();
         Console.WriteLine("Tenha o livro em mão e digite:");
         Console.Write("Título: ");
         newBook.Title = Console.ReadLine()!;
@@ -121,19 +116,17 @@ internal class APICall
         if (Console.ReadLine() == "s".ToLower())
         {
             await ManipulateBook.AddBook(newBook);
-            Console.WriteLine("\r\nSalvando...");
-            Thread.Sleep(3000);
+            Console.WriteLine();
+            Console.WriteLine("Salvando...");
             Console.Clear();
             Console.WriteLine("Salvo!");
             Console.WriteLine("Voltando ao meu principal");
-            Thread.Sleep(1500);
             Console.Clear();
             Menu.MainMenu();
         }
         else
         {
             Console.WriteLine("Voltando ao meu principal");
-            Thread.Sleep(1500);
             Console.Clear();
             Menu.MainMenu();
         }

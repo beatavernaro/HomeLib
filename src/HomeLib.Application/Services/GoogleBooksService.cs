@@ -47,7 +47,12 @@ public static class GoogleBooksService
         {
             throw new Exception("Livro não encontrado.");
         }
-        
+
+        if (bookResponse.FirstVolumeInfo != null)
+        {
+            bookResponse.FirstVolumeInfo.Isbn = isbn;
+        }
+
         return bookResponse;
     }
 }

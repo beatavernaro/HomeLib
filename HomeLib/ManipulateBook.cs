@@ -124,7 +124,7 @@ namespace HomeLib
         #endregion
 
         #region AddBook
-        public static async Task AddBook(DomainDto.BookData newBook)
+        public static async Task AddBook(Domain.Entidades.Book newBook)
         {
             HttpClient httpClient = new HttpClient();
             var json = JsonSerializer.Serialize(newBook);

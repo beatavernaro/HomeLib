@@ -1,4 +1,4 @@
-﻿namespace HomeLib.Domain.Dto;
+﻿namespace HomeLib.Domain.Entidades;
 
 /// <summary>
 /// Representa os dados do livro.
@@ -22,10 +22,9 @@
 /// </a>
 /// </para> 
 /// </remarks>
-public class BookData
+public class Book : EntidadeBase
 {
-    public int Id { get; set; }
-
+    public string? Isbn { get; set; } = string.Empty;
     public string? Title { get; set; } = string.Empty;
     
     /// <summary>

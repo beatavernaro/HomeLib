@@ -15,10 +15,14 @@
         <Using Include="System" />
         <Using Include="System.Net" />
         <Using Include="System.Net.Http" />
+        <Using Include="System.Linq" />
+        <Using Include="System.Collections.Generic" />
+        <Using Include="System.IO" />
         <Using Include="System.Threading.Tasks" />
     </ItemGroup>
     
     <ItemGroup Label="HomeLib">
+        <Using Include="HomeLib.Domain.Entidades" />
         <Using Include="HomeLib.Domain.Dto" />
         
         <ProjectReference Include="..\HomeLib.Domain\HomeLib.Domain.csproj" />
