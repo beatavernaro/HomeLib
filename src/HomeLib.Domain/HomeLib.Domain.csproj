@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <!--
+        A plataforma se adapta sempre ao valor default da linguagem mesmo que não especifique, no entanto, é sempre bom
+        definir essas coisas explicitamente para não gerar dúvidas no restante do time, principalmente numa era onde
+        as pessoas trabalham em homeoffice.
+        
+        Ref: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/configure-language-version#defaults
+        -->
+        <LangVersion>10</LangVersion>
+        <!--
+        Embora o recurso seja prático num projeto inicial, ele contribui negativamente num projeto maior, pois
+        torna obscuro o que realmente faz parte do projeto. Partindo do princípio "iniciar limpo", iremos adicionando
+        progressivamente o que realmente é necessário.
+        
+        Ref: https://learn.microsoft.com/en-us/dotnet/core/tutorials/top-level-templates#implicit-using-directives
+        -->
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Description>Centraliza a estrutura a ser usada em todo o sistema, contendo intefaces, helpers, entidades, 
+            enumeradores e qualquer outro artifício específico e necessário para as demais camadas. 
+            Não referencia ninguém.
+        </Description>
+    </PropertyGroup>
+
+    <!--
+    Definir todos os usings globais da biblioteca no csproj centraliza a informação, facilitando a gestão, além de 
+    tornar as classes mais limpas.
+    -->
+    <ItemGroup Label="Padrão da linguagem">
+        <Using Include="System.Collections.Generic" />
+        <Using Include="System.Text.Json.Serialization" />
+    </ItemGroup>
+</Project>

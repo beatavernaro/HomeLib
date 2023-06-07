@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <LangVersion>10</LangVersion>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Description>Centraliza a lógica da aplicação, expondo as interfaces necessárias para cada serviço. No caso 
+            de um serviço de envio de e-mail, sua interface fica na Application enquanto a implementação fica na 
+            infraestrutura. Referencia apenas a Domain.
+        </Description>
+    </PropertyGroup>
+
+    <ItemGroup Label="Padrão da linguagem">
+        <Using Include="System" />
+        <Using Include="System.Net" />
+        <Using Include="System.Net.Http" />
+        <Using Include="System.Linq" />
+        <Using Include="System.Collections.Generic" />
+        <Using Include="System.IO" />
+        <Using Include="System.Threading.Tasks" />
+    </ItemGroup>
+    
+    <ItemGroup Label="HomeLib">
+        <Using Include="HomeLib.Domain.Entidades" />
+        <Using Include="HomeLib.Domain.Dto" />
+        
+        <ProjectReference Include="..\HomeLib.Domain\HomeLib.Domain.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup Label="Pagotes Nuget">
+        <Using Include="Newtonsoft.Json" />
+        
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
+
+</Project>

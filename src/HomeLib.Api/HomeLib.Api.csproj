@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <LangVersion>10</LangVersion>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Description>Endpoint da aplicação.</Description>
+    </PropertyGroup>
+
+    <ItemGroup Label="Padrão da linguagem">
+        <Using Include="System" />
+        <Using Include="System.Linq" />
+        <Using Include="System.Collections.Generic" />
+        <Using Include="Microsoft.AspNetCore.Mvc" />
+        <Using Include="System.Threading.Tasks;" />
+        <Using Include="Microsoft.Extensions.Logging" />
+        <Using Include="System.Net.Mime" />
+    </ItemGroup>
+    
+    <ItemGroup Label="HomeLib">
+        <Using Include="HomeLib.Application.Services" />
+        <Using Include="HomeLib.Domain.Entidades" />
+      <ProjectReference Include="..\HomeLib.Application\HomeLib.Application.csproj" />
+    </ItemGroup>
+
+    <ItemGroup Label="Pagotes Nuget">
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
+    </ItemGroup>
+
+</Project>
