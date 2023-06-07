@@ -3,7 +3,7 @@
 /// <summary>
 /// Representa os dados do livro proveniente da Api do Google
 /// </summary>
-public class BookResponse
+public class GoogleBookResponse
 {
     public long TotalItems { get; set; }
 

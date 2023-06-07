@@ -14,7 +14,7 @@ public static class GoogleBooksService
     /// Obtém detalhe de um livro.
     /// </summary>
     /// <param name="isbn">Código ISBN.</param>
-    /// <returns>Retorna um <see cref="BookResponse"/>.</returns>
+    /// <returns>Retorna um <see cref="GoogleBookResponse"/>.</returns>
     /// <exception cref="Exception">Interrompe a aplicação caso as validações básicas não sejam atendidas.</exception>
     /// <remarks>
     /// <para>
@@ -23,7 +23,7 @@ public static class GoogleBooksService
     /// futuro. 
     /// </para>
     /// </remarks>
-    public static async Task<BookResponse?> ObterLivroPorNumeroIsbnAsync(string? isbn)
+    public static async Task<GoogleBookResponse?> ObterLivroPorNumeroIsbnAsync(string? isbn)
     {
         if (string.IsNullOrWhiteSpace(isbn))
         {
@@ -41,7 +41,7 @@ public static class GoogleBooksService
         }
 
         var bookResponseSerializado = await httpResponseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
-        var bookResponse = JsonConvert.DeserializeObject<BookResponse>(bookResponseSerializado);
+        var bookResponse = JsonConvert.DeserializeObject<GoogleBookResponse>(bookResponseSerializado);
 
         if (bookResponse is null || bookResponse.TotalItems <= 0)
         {

@@ -1,6 +1,10 @@
 ﻿//Estou isolando o namespace novo para demarcar bem o que é novo e o que você fez, assim
 //fica mais fácil compreender o objetivo das mudanças. Ao fim da refatoração, poderemos 
 //simplificar isso.
+
+using System.Net;
+using System.Text;
+using Newtonsoft.Json;
 using DomainDto = HomeLib.Domain.Dto;
 using DomainEntidade = HomeLib.Domain.Entidades;
 
@@ -8,6 +12,11 @@ namespace HomeLib;
 
 internal class APICall
 {
+    /// <summary>
+    /// Url base da execução da HomeLib.Api.
+    /// </summary>
+    private const string ApiUrlBase = @"https://localhost:7031/";
+
     #region Call Google Books API
     public static async Task Call()
     {
@@ -74,9 +83,24 @@ internal class APICall
 
     #region SaveBook
 
-    private static async Task SaveBook(DomainDto.BookResponse bookResponse)
+    private static async Task SaveBook(DomainDto.GoogleBookResponse googleBookResponse)
     {
-        await BookService.SaveBookAsync(bookResponse).ConfigureAwait(false);
+        //Como agora vamos espetar a Api aqui, futuramente, a HomeLib não terá referência direta
+        //a HomeLib.Application. Portanto, irei deixar aqui por referência.
+        //await BookService.SaveBookFromGoogleBookAsync(googleBookResponse).ConfigureAwait(false);
+
+        using (var httpClient = new HttpClient())
+        {
+            var json = JsonConvert.SerializeObject(googleBookResponse);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await httpClient.PostAsync($"{ApiUrlBase}Book", httpContent);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
+        }
+
         Console.WriteLine();
         Console.WriteLine("Salvando...");
         Console.Clear();

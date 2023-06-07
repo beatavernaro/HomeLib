@@ -1,0 +1,1 @@
+[{"Isbn":"string","Title":"string","Authors":"string","PublishedDate":"string","PageCount":0,"Categorie":"string","Language":"string","Description":"string","Id":0},{"Isbn":"","Title":"","Authors":null,"PublishedDate":"","PageCount":null,"Categorie":"","Language":"","Description":"","Id":0}]
