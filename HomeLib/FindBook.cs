@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.Json.Serialization;
-using System.Text.Json;
-using System.Net.Http;
-using System.Collections.Generic;
+﻿using System.Text.Json;
 
 
 namespace HomeLib
@@ -16,16 +8,16 @@ namespace HomeLib
 
         #region GetAll
         public static async Task GetAll()
-         {
+        {
 
-                HttpClient httpClient = new HttpClient();
-                
-                try
-                {
-                    var response = await httpClient.GetAsync($"https://localhost:44335/api/Books");
-                    var code = response.StatusCode;
-                    var message = await response.Content.ReadAsStringAsync();
-                    var result = JsonSerializer.Deserialize<List<BookData>>(message);
+            HttpClient httpClient = new HttpClient();
+
+            try
+            {//refit
+                var response = await httpClient.GetAsync($"https://localhost:5247/api/books");
+                var code = response.StatusCode;
+                var message = await response.Content.ReadAsStringAsync();
+                var result = JsonSerializer.Deserialize<List<BookData>>(message);
 
                 foreach (var bookData in result.OrderBy(x => x.Title))
                 {
@@ -34,12 +26,12 @@ namespace HomeLib
                 }
                 Menu.GoBack();
             }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
 
-         }
+        }
         #endregion
 
         #region ShowBookByYear
@@ -60,7 +52,8 @@ namespace HomeLib
                 }
                 Menu.GoBack();
 
-            } else
+            }
+            else
             {
                 Console.WriteLine("Livro não encontrado!");
                 Console.WriteLine("Voltando ao menu inicial");

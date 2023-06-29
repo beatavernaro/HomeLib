@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.Json.Serialization;
-using System.Text.Json;
-using System.Net.Http;
-using System.Collections.Generic;
+﻿using System.Text.Json;
 
 namespace HomeLib
 {
@@ -15,12 +7,12 @@ namespace HomeLib
 
         #region Call Google Books API
         public static async Task Call()
-         {
-            
-                HttpClient httpClient = new HttpClient();
-                
-                try
-                {
+        {
+
+            HttpClient httpClient = new HttpClient();
+
+            try
+            {
                 var newSearch = "s";
                 while (newSearch == "s")
                 {
@@ -63,19 +55,19 @@ namespace HomeLib
                         }
                     }
                 }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                }
-         }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
         #endregion
 
         #region SaveBook
         public static async Task SaveBook(BookResponse bookResponse)
         {
             var bookInfo = bookResponse.Items[0].VolumeInfo;
-           
+
             BookData newBook = new BookData();
 
             newBook.Title = bookInfo.Title;
@@ -89,16 +81,16 @@ namespace HomeLib
             newBook.Language = bookInfo.Language;
             newBook.Description = bookInfo.Description;
 
-                await ManipulateBook.AddBook(newBook);
-                Console.WriteLine("\r\nSalvando...");
-                Thread.Sleep(3000);
-                Console.Clear();
-                Console.WriteLine("Salvo!");
+            await ManipulateBook.AddBook(newBook);
+            Console.WriteLine("\r\nSalvando...");
+            Thread.Sleep(3000);
+            Console.Clear();
+            Console.WriteLine("Salvo!");
             Console.WriteLine("Voltando ao menu principal");
-                Thread.Sleep(1500);
-                Console.Clear();
-                Menu.MainMenu();
-          
+            Thread.Sleep(1500);
+            Console.Clear();
+            Menu.MainMenu();
+
         }
         #endregion
 

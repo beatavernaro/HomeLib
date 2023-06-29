@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.Json.Serialization;
+﻿using System.Text;
 using System.Text.Json;
-using System.Net.Http;
-using System.Collections.Generic;
 
 
 namespace HomeLib
@@ -136,7 +129,7 @@ namespace HomeLib
             HttpClient httpClient = new HttpClient();
             var json = JsonSerializer.Serialize(newBook);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await httpClient.PostAsync("https://localhost:44335/api/Books", httpContent);
+            var response = await httpClient.PostAsync("https://localhost:5247/api/Books", httpContent);
         }
         #endregion
 
